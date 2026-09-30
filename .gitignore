@@ -1,0 +1,17 @@
+# Python / Backend
+backend/venv/
+backend/.env
+backend/__pycache__/
+backend/*.db
+backend/.pytest_cache/
+
+# React / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# Archivos de sistema / IDE
+.DS_Store
+.vscode/
+*.pem
