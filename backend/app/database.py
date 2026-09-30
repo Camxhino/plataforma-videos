@@ -6,10 +6,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Para desarrollo local se usa SQLite si no hay BD configurada aún; 
-# luego cambiaremos este valor por la URL de Amazon RDS en el .env
+# Cargar la URL de la base de datos desde el .env
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./dev.db")
 
+# Corrección de compatibilidad para PostgreSQL si la URL empieza con 'postgres://'
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+# Configurar el motor de SQLAlchemy
 engine = create_engine(
     DATABASE_URL, 
     connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
